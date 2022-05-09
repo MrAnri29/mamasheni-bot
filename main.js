@@ -13,19 +13,18 @@ global.client = new Client({
     disableMentions: 'everyone',
 });
 
-//თუ დაჰოსთვა გინდათ:
-const express = require('express');
-const app = express()
+var http = require('http'); 
+var server = http.createServer(function (req, res) {   
+    if (req.url == '/') { 
+        res.writeHead(200, { 'Content-Type': 'text/html' }); 
+        res.write('<html><body><p>Hi</p></body></html>');
+        res.end();
+    }
+    else
+        res.end('Invalid Request!');
+});
 
-//ის რაც იქნება html ფაელზე
-app.get("/", (req, res) => {
-    res.send("express is here babe <3");
-})
-
-//ის რაც დაიწერება console-ში როდესაც express-ის ქმედებები სრულყოფილად შესრულდება
-app.listen(3000, () => {
-    console.log("express is ready!");
-})
+server.listen(80);
 
 //შემოვიტანოთ config
 client.config = require('./config');
@@ -40,4 +39,4 @@ require('./src/events');
 //dotenv გვჭირდება იმაში რომ ჩვენი TOKEN იყოს დამალული სხვებისაგან
 require('dotenv').config({ path: './.env' });
 
-client.login(process.env.TOKEN || client.config.app.token || `შენი ტოკენი აქ`);
+client.login(process.env.TOKEN || client.config.app.token || `შენი ტოკენი აქ <3`);
