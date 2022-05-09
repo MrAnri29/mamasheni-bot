@@ -13,6 +13,20 @@ global.client = new Client({
     disableMentions: 'everyone',
 });
 
+//თუ დაჰოსთვა გინდათ:
+const express = require('express');
+const app = express()
+
+//ის რაც იქნება html ფაელზე
+app.get("/", (req, res) => {
+    res.send("express is here babe <3");
+})
+
+//ის რაც დაიწერება console-ში როდესაც express-ის ქმედებები სრულყოფილად შესრულდება
+app.listen(3000, () => {
+    console.log("express is ready!");
+})
+
 //შემოვიტანოთ config
 client.config = require('./config');
 
